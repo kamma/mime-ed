@@ -8,8 +8,6 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -155,12 +153,11 @@ public class MimeEDApp {
 
 	protected void decodeAndSave(File file) throws Exception {
 		BufferedReader br = new BufferedReader(new StringReader(textArea.getText()));
-		for (String line = br.readLine(); line != null;) {
-			String h1 = line;
-			String h2 = br.readLine();
-			String h3 = br.readLine();
-			String h4 = br.readLine();
-			String filename = h4.split("filename=")[1].replaceAll("\"", "");
+		for (String line = br.readLine(); line != null;) { //read header line 1
+			br.readLine();//read header line 2
+			br.readLine();//read header line 3
+			String header4 = br.readLine();
+			String filename = header4.split("filename=")[1].replaceAll("\"", "");
 			br.readLine();
 			String body = "";
 			line = br.readLine();
